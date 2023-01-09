@@ -57,16 +57,17 @@ let users = [
 
 let sumBalance = 0;
 
-const balanceArray = users.map(function(element) {
+const balanceArray = users.reduce(function(result, element) {
     const balance = element.balance.slice(1).replace(',', '');
     sumBalance += Number(balance);
 
     if(balance > 2000) {
-        return element.phone;
+        result.push(element.phone);
     }
 
-    return;
-}, sumBalance).filter(element => element !== undefined);
+    return result;
+
+}, [], sumBalance)
 
 console.log(balanceArray);
 console.log(`Sum of balance is ${sumBalance.toFixed(2)}`);
